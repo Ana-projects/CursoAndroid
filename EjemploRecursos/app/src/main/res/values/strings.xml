@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EjemploRecursos</string>
+    <string name="saludo">Hello %1$s!</string>
+    <string name="despedida">Goodbye</string>
+</resources>
