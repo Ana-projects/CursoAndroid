@@ -9,6 +9,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,9 +24,12 @@ import com.anamorcin.ejemplocontadormvvm.ui.theme.EjemploContadorMVVMTheme
 import com.anamorcin.ejemplocontadormvvm.viewmodels.ContadorViewModel
 
 @Composable
-fun Contador(contador: Int, onIncrementar: () -> Unit, onDecrementar: () -> Unit,
+fun Contador(modelo: ContadorViewModel = viewModel(),
+             onIncrementar : () -> Unit,
+             onDecrementar : () -> Unit,
              modifier: Modifier = Modifier
 ) {
+    val contador = remember { modelo.contador }.observeAsState(initial = 0).value
     val isActivoDecrementar = contador > 0
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -62,7 +67,7 @@ fun Contador(contador: Int, onIncrementar: () -> Unit, onDecrementar: () -> Unit
 fun ContadorPreview(modelo: ContadorViewModel = viewModel()) {
     EjemploContadorMVVMTheme() {
         Contador(
-            modelo.contador,
+            modelo,
             {modelo.incrementarContador()},
             {modelo.decrementarContador()}
         )

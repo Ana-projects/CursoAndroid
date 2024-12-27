@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
                     val modelo: ContadorViewModel = viewModel()
                     Contador(
-                        modelo.contador,
+                        modelo,
                         { modelo.incrementarContador() },
                         { modelo.decrementarContador() }
                     )
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
 fun ContadorPreview(modelo: ContadorViewModel = viewModel()) {
     EjemploContadorMVVMTheme() {
         Contador(
-            modelo.contador,
+            modelo,
             {modelo.incrementarContador()},
             {modelo.decrementarContador()}
         )
