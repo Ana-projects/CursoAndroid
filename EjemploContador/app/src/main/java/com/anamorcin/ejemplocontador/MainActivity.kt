@@ -40,7 +40,11 @@ class MainActivity : ComponentActivity() {
             EjemploContadorTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
                     var contador by rememberSaveable { mutableStateOf(0) }
-                    Contador(contador = contador, onIncrementar = {contador++}, onDecrementar = {contador--})
+                    Contador(
+                        contador = contador,
+                        onIncrementar = {contador++},
+                        onDecrementar = {contador--}
+                    )
                 }
             }
         }

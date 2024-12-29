@@ -21,31 +21,19 @@ import com.anamorcin.aplicaciontallermvvm.ui.theme.AplicacionTallerMVVMTheme
 fun ServicioView(modifier: Modifier = Modifier, modelo: TallerViewModel = viewModel()) {
 
     Column(Modifier.padding(16.dp)) {
-
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Switch(checked = modelo.lavado, onCheckedChange = {
-                modelo.cambiarLavado(it)
-            })
-            Spacer(modifier = Modifier.width(20.dp))
-            Text("Lavado (10)")
-        }
-        Divider()
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Switch(checked = modelo.neumaticos, onCheckedChange = {
-                modelo.cambiarNeumaticos(it)
-            })
-            Spacer(modifier = Modifier.width(20.dp))
-            Text("Cambio Neumáticos (250)")
-        }
-        Divider()
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Switch(checked = modelo.aceite, onCheckedChange = {
-                modelo.cambiarAceite(it)
-            }
-            )
-            Spacer(modifier = Modifier.width(20.dp))
-            Text("Cambio de aceite (75)")
-        }
+       for (servicio in modelo.servicios) {
+           Row(verticalAlignment = Alignment.CenterVertically) {
+              Switch(
+                   checked = servicio.seleccionado,
+                   onCheckedChange = {
+                       modelo.cambiar(it, servicio)
+                   }
+               )
+               Spacer(Modifier.width(20.dp))
+               Text(servicio.nombre + "(${servicio.precio})")
+           }
+           Divider()
+       }
     }
 }
 
